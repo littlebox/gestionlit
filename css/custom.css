@@ -1,0 +1,11 @@
+.bar .logo {
+  max-height: 58px;
+}
+.seccion-valores .text-block {
+  margin-bottom: 1.85714286em;
+}
+
+footer a {
+  text-decoration: none;
+  color: #fff;
+}
