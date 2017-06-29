@@ -50,16 +50,15 @@ function mail_attachment($to, $subject, $message, $from, $file) {
 
 	// message
 	$body = "--" . $uid . $eol;
-	$body .= "Content-Type: text/plain; charset=\"iso-8859-1\"" . $eol;
-	$body .= "Content-Transfer-Encoding: 8bit" . $eol;
-	$body .= $message . $eol;
+	$body .= "Content-Type: text/plain; charset=\"UTF-8\"" . $eol . $eol;
+	$body .= $message . $eol . $eol;
 
 	// attachment
 	$body .= "--" . $uid . $eol;
 	$body .= "Content-Type: application/octet-stream; name=\"" . $filename . "\"" . $eol;
 	$body .= "Content-Transfer-Encoding: base64" . $eol;
 	$body .= "Content-Disposition: attachment" . $eol;
-	$body .= $content . $eol;
+	$body .= $content . $eol . $eol;
 	$body .= "--" . $uid . "--";
 
 	return mail($to, $subject, $body, $headers);
