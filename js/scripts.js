@@ -1029,11 +1029,26 @@ mr = (function (mr, $, window, document){
                     contentType: false,
                     processData: false,
 
+                    // Custom XMLHttpRequest
+                    xhr: function() {
+                        var myXhr = $.ajaxSettings.xhr();
+                        if (myXhr.upload) {
+                            // For handling the progress of the upload
+                            myXhr.upload.addEventListener('progress', function(e) {
+                                if (e.lengthComputable) {
+                                    var progressPercentage = parseInt(100.0 * e.loaded / e.total);
+                                    $('#submit-button').html(progressPercentage + '%');
+                                }
+                            } , false);
+                        }
+                        return myXhr;
+                    },
                     success: function(response) {
                         // Swiftmailer always sends back a number representing number of emails sent.
                         // If this is numeric (not Swift Mailer error text) AND greater than 0 then show success message.
 
                         submitButton.removeClass('btn--loading');
+                        $('#submit-button').html('Enviar');
 
                         if ($.isNumeric(response)) {
                             if (parseInt(response,10) > 0) {
@@ -1066,6 +1081,7 @@ mr = (function (mr, $, window, document){
                         formError.text(errorHTTP).stop(true).fadeIn(1000);
                         formSuccess.stop(true).fadeOut(1000);
                         submitButton.removeClass('btn--loading');
+                        $('#submit-button').html('Enviar');
                     }
                 });
             }
