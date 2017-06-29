@@ -50,7 +50,7 @@ function mail_attachment($to, $subject, $message, $from, $file) {
 
 	// message
 	$body = "--" . $uid . $eol;
-	$body .= "Content-Type: text/plain; charset=\"UTF-8\"" . $eol . $eol;
+	$body .= "Content-type: text/html; charset=utf-8" . $eol . $eol;
 	$body .= $message . $eol . $eol;
 
 	// attachment
