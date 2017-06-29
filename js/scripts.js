@@ -1018,11 +1018,17 @@ mr = (function (mr, $, window, document){
                 
                 // Create a new loading spinner in the submit button.
                 submitButton.addClass('btn--loading');
-
+                    
                 jQuery.ajax({
                     type: "POST",
                     url: "mail/mail.php",
-                    data: thisForm.serialize()+"&url="+window.location.href+"&captcha="+captchaUsed,
+                    data: new FormData(document.getElementById("contact-form")),
+                    // Tell jQuery not to process data or worry about content-type
+                    // You *must* include these options!
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+
                     success: function(response) {
                         // Swiftmailer always sends back a number representing number of emails sent.
                         // If this is numeric (not Swift Mailer error text) AND greater than 0 then show success message.
@@ -1039,6 +1045,7 @@ mr = (function (mr, $, window, document){
                                 }
 
                                 mr.forms.resetForm(thisForm);
+                                $('#cv-check').trigger('change');
                                 mr.forms.showFormSuccess(formSuccess, formError, 1000, 5000, 500);
                                 mr.forms.captcha.resetWidgets();
                             }

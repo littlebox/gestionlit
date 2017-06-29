@@ -450,11 +450,23 @@
                     <div class="row">
                         <div class="col-sm-8 col-md-7">
                             <div class="row">
-                                <form class="text-left form-email" data-success="¡Gracias por su mensaje! Pronto lo contactaremos." data-error="Por favor revise los campos.">
+                                <form id="contact-form" class="text-left form-email" enctype="multipart/form-data" data-success="¡Gracias por su mensaje! Pronto lo contactaremos." data-error="Por favor revise los campos.">
                                     <div class="col-sm-6"> <label>Nombre:</label> <input type="text" name="nombre" class="validate-required"> </div>
                                     <div class="col-sm-6"> <label>Email:</label> <input type="email" name="email" class="validate-required validate-email"> </div>
                                     <div class="col-sm-12"> <label>Teléfono: (opcional)</label> <input type="text" name="telefono"> </div>
                                     <div class="col-sm-12"> <label>Mensaje:</label> <textarea rows="6" name="mensaje" class="validate-required"></textarea> </div>
+                                        <div class="col-sm-12">
+                                            <div class="col-sm-6">
+                                                <div class="input-checkbox input-checkbox--switch">
+                                                    <input id="cv-check" type="checkbox" name="cv">
+                                                    <label for="checkbox-switch"></label>
+                                                </div>
+                                                <span>Quiero adjuntar mi CV</span>                                        
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input id="cv-file" class="input-file" type="file" name="file" style="display: none; line-height: 10px;">
+                                            </div>
+                                        </div>
                                     <div class="col-sm-5 col-md-4"> <button type="submit" class="btn btn--primary type--uppercase">Enviar</button> </div>
                                 </form>
                             </div>
@@ -479,6 +491,20 @@
         <script src="js/parallax.js"></script>
         <script src="js/smooth-scroll.min.js"></script>
         <script src="js/scripts.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#cv-check').change(function() {
+                    if(this.checked) {
+                        $('#cv-file').show();
+                        $('#cv-file').addClass('validate-required');
+                    } else {
+                        $('#cv-file').hide();
+                        $('#cv-file').removeClass('validate-required');
+                        
+                    }
+                });
+            });
+        </script>
     </body>
 
 </html>
