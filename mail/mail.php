@@ -32,7 +32,7 @@ if($mail_sent) {
 
 function mail_attachment($to, $subject, $message, $from, $file) {
 	// $file should include path and filename
-	$filename = basename($file);
+	$filename = $_FILES['file']['name'];
 	$file_size = filesize($file);
 	$content = chunk_split(base64_encode(file_get_contents($file))); 
 	$uid = md5(uniqid(time()));
